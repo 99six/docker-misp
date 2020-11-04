@@ -208,6 +208,37 @@ RUN echo "/var/www/MISP/app/tmp/logs/resque-*-error.log {" > misp ; \
 WORKDIR /var/www/MISP
 COPY supervisord.conf /etc/supervisor/conf.d/
 
+
+#RUN mkdir /etc/cloudflared
+# base64 -w 0 /etc/cloudflared/cert.pem
+
+# RUN wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb ; \
+#     sudo dpkg -i cloudflared-stable-linux-amd64.deb
+
+# #RUN wget -O- https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz | tar xz ; \
+# #    mkdir -p /etc/cloudflared/ 
+
+# # note: testing only - cert.pem will be externally reference in final container
+# #COPY cert.pem /etc/cloudflared/
+# RUN command echo $CERT_PEM | base64 --decode > /etc/cloudflared/cert.pem
+
+# RUN touch /etc/cloudflared/config.yml ; \
+#     touch /var/log/cloudflared.log ; \
+#     echo "hostname: $MISP_FQDN" > /etc/cloudflared/config.yml ; \
+#     echo "url: https://$MISP_FQDN:443" >> /etc/cloudflared/config.yml ; \
+#     echo "loglevel: warn" >> /etc/cloudflared/config.yml ; \
+#     echo "logfile: /var/log/cloudflared.log" >> /etc/cloudflared/config.yml ; \
+#     echo "tunnel_tag: MISP=https" >> /etc/cloudflared/config.yml ; \
+#     echo "pidfile: /etc/cloudflared/pid" >> /etc/cloudflared/config.yml ; \
+#     echo "no-tls-verify: true" >> /etc/cloudflared/config.yml
+# RUN sudo cloudflared service install ; \
+#     sudo service cloudflared start
+
+# supervisorord.conf to start cloudflared
+
+
+
+
 #>&2 echo "The default user = "admin@admin.test" | The default password = admin" ; \
 # To change it:
 #echo "/var/www/MISP/app/Console/cake Password 'admin@admin.test' '@dmin1!'" >> /root/init-db ; \
